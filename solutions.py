@@ -106,3 +106,58 @@ def q4():
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]], 6, 8, 10)
 
 q4()
+
+print ('******************************************************')
+
+## Question 5:
+
+global head
+head = None
+
+class Node(object):
+  def __init__(self, data):
+    self.data = data
+    self.next = None
+
+def push(new_data):
+    global head
+    new_node = Node(new_data)
+    new_node.next = head
+    head = new_node
+
+def question5(head, m):
+    node_start = head
+    ref_node = head
+
+    count = 0
+
+    if(head is not None):
+        while(count < m):
+            ref_node = ref_node.next
+            count += 1
+
+
+    while(ref_node is not None):
+        node_start = node_start.next
+        ref_node = ref_node.next
+
+    return node_start.data
+
+push("nine")
+push("eight")
+push("seven")            
+push("six")
+push("five")
+push("four")
+push("three")
+push("two")
+push("one")            
+push("zero")
+    
+def q5():
+    print(question5(head, 4))
+    print(question5(head, 10))
+    print(question5(head, 1))
+
+q5()
+print ('******************************************************')
