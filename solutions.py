@@ -55,7 +55,54 @@ def q2():
     print question2('AXZCBACAECBBCEA')
     print question2('a')
 
-
 q2()
 
 print ('******************************************************')
+
+## Question 4:
+
+def question4(T, root, n1, n2):
+    if (n1 > root and n2 < root) or (n1 < root and n2 > root):
+        return root
+    elif (n1 < root and n2 < root):
+        l = T[root].index(1)
+        if n1 == l or n2 == l:
+            return root
+        else:
+            root = l
+    elif (n1 > root and n2 > root):
+        r = len(T[root]) - T[root][::-1].index(1) - 1
+        if n1 == r or n2 == r:
+            return root
+        else:
+            root = r
+            
+    return question4(T, root, n1, n2)
+
+
+def q4():
+    print question4([[0, 1, 0, 0, 0], 
+           [0, 0, 0, 0, 0], 
+           [0, 0, 0, 0, 0], 
+           [1, 0, 0, 0, 1], 
+           [0, 0, 0, 0, 0]], 3, 1, 4)
+
+    print question4([[0, 1, 0, 1],
+                    [0, 0, 0, 0],
+                    [1, 0, 1, 0],
+                    [1, 1, 1, 0]], 0, 2, 4)
+    
+    print question4([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]], 6, 8, 10)
+
+q4()
