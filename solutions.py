@@ -59,6 +59,92 @@ q2()
 
 print ('******************************************************')
 
+## Question 3:
+
+import collections
+
+# Global Variables declartion.
+parent = dict()
+rank = dict()
+
+# Make vertices.
+def m(v):
+    parent[v] = v
+    rank[v] = 0
+
+# Find vertices.
+def f(v):
+    if parent[v] != v:
+        parent[v] = f(parent[v])
+    return parent[v]
+
+# Creates union between vertices.
+def u(v1, v2):
+    r1 = f(v1)
+    r2 = f(v2)
+    if r1 != r2:
+        if rank[r1] > rank[r2]:
+            parent[r2] = r1
+        else:
+            parent[r1] = r2
+            if rank[r1] == rank[r2]:
+                rank[r2] += 1
+
+# Main Function.
+def question3(G):
+    for v in G.keys():
+        m(v)
+
+    MST = set()
+    
+    edges = get_edges(G)
+    edges.sort()
+    
+    for e in edges:
+        w, v1, v2 = e
+        if f(v1) != f(v2):
+            u(v1, v2)
+            MST.add(e)
+
+    node_info = collections.defaultdict(list)
+    for w, v1, v2 in MST:
+        node_info[v1].append((v2, w))
+        node_info[v2].append((v1, w))
+    return node_info
+
+def get_edges(node_info):
+    edge_list = []
+    for v, edges in node_info.iteritems():
+        for e in edges:
+            if v < e[0]:
+                edge_list.append((e[1], v, e[0]))
+    return edge_list
+
+def q3():
+    graph1 = {
+    'A': [('B', 1), ('C', 5), ('D', 3)],
+    'B': [('A', 1), ('C', 4), ('D', 2)],
+    'C': [('B', 4), ('D', 1)],
+    'D': [('A', 3), ('B', 2), ('C', 1)],
+    }
+    print question3(graph1)
+    graph2 = {
+    'A': [('B', 4), ('C', 3)],
+    'B': [('A', 4), ('C', 1)], 
+    'C': [('B', 1), ('A', 3)]
+    }
+    print question3(graph2)
+    graph3 = {
+    'A': [('B', 1)],
+    'B': [('A', 1), ('C', 7)],
+    'C': [('B', 7)]
+    }
+    print question3(graph3)
+    
+q3()
+
+print ('******************************************************')
+
 ## Question 4:
 
 def question4(T, root, n1, n2):
