@@ -68,20 +68,20 @@ parent = dict()
 rank = dict()
 
 # Make vertices.
-def m(v):
+def make_vertex(v):
     parent[v] = v
     rank[v] = 0
 
 # Find vertices.
-def f(v):
+def find_vertex(v):
     if parent[v] != v:
-        parent[v] = f(parent[v])
+        parent[v] = find_vertex(parent[v])
     return parent[v]
 
 # Creates union between vertices.
-def u(v1, v2):
-    r1 = f(v1)
-    r2 = f(v2)
+def union_vertices(v1, v2):
+    r1 = find_vertex(v1)
+    r2 = find_vertex(v2)
     if r1 != r2:
         if rank[r1] > rank[r2]:
             parent[r2] = r1
@@ -93,7 +93,7 @@ def u(v1, v2):
 # Main Function.
 def question3(G):
     for v in G.keys():
-        m(v)
+        make_vertex(v)
 
     MST = set()
     
@@ -102,8 +102,8 @@ def question3(G):
     
     for e in edges:
         w, v1, v2 = e
-        if f(v1) != f(v2):
-            u(v1, v2)
+        if find_vertex(v1) != find_vertex(v2):
+            union_vertices(v1, v2)
             MST.add(e)
 
     node_info = collections.defaultdict(list)
@@ -142,7 +142,6 @@ def q3():
     print question3(graph3)
     
 q3()
-
 print ('******************************************************')
 
 ## Question 4:
