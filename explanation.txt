@@ -1,1 +1,49 @@
-Question 1
+Question 1:
+
+The efficient way to solve this problem is forming lists of strings s and t and iterating through the s_list 
+to check if there is a matching character in t_list. Function question1() iterates through substrings of s with 
+len(t) and performs the anagram test until an anagram is found, in which case the function returns true. 
+If the function reaches the end of s without finding an anagram, it returns false.
+
+The time complexity can be taken as O(n) where n is the len(s) as the function loops through all characters of s.
+The space for storing strings s and t is constant i.e. O(1).
+
+Question 2:
+
+The palindrome functions searches for a string whose first and last characters matches each other. The question2() 
+iterates through the string of len(s). If the characters in string are odd numbered, it calls palindrome function
+that takes the same character and finds left and right. Else, the parameters to the palindrome function 
+includes two consecutive characters.
+
+The loop traverse through the string of len(s). For a palindrome, string has to be traversed from both sides increasing 
+the complexity. Therefore, the time complexity is O(n^2). Since we are only storing the longest  palindromic substring,
+the storage complexity is O(1).
+
+Question 3:
+
+It is a classic Greedy algorithm for calculating MST. The basic idea is to sort the edges by its weight and edge that 
+doesn't lead to formation of cycles. One way to make sure there are no cycle in the graph is by keeping track of each 
+vertice in a list of sets. If a new edge that connects two vertices exists within the same set, we discard it. Else, we 
+include it to the set and take union of the sets. 
+
+This algorithm generate list of edges that take O(E) time and O(E) space. Sorting of edges by weight takes O(Elog(E)) time
+and O(E) space. The overall efficiency would be the major contributor of O(ElogE). Edges set holds each edge once. 
+Since they are linearly relate to number of edges the space complexity can be taken as O(E).
+
+MST ==> Minimum spanning tree
+
+Question 4:
+
+In a binary search tree (BST), since all descendants on either side of a node are smaller or larger than that node, we can 
+easily determine the least common ancestor (LCA) of any two nodes. If the ancestor (root) node weight lies between the two 
+child nodes then root node becomes LCA. If the two chosen nodes are in a descendant relationship to each other, then the LCA 
+is the node preceding the parent node. To solve this problem we only need to flow down the binary search tree, and stop when 
+we encounter a node that lies between the two chosen nodes or is a parent to one of the two nodes.
+
+The time complexity of above solution is O(n) where n is height of tree and space required to store a BST is O(n)
+
+Question 5:
+
+We have to traverse the linked list twice. The first time we traverse through the linked list to get its length. 
+Then we can determine elements to traverse the second time in n-m steps. The time will still be O(2n) for traverse through ll 
+twice. Hence the run time efficiency can be said as O(n). Since we only store the length, the space complexity will be O(1). 
